@@ -9,7 +9,7 @@ class CustomEndDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: Theme.of(context).primaryColor,
       width: 175,
-      child: const UserProfile(),
+      child: const UserProfile(userName: 'My name'),
     );
   }
 }

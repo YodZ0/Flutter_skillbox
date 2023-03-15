@@ -16,7 +16,7 @@ class CustomDrawer extends StatelessWidget {
             child: Container(
               width: double.infinity,
               color: Theme.of(context).primaryColor,
-              child: const UserProfile(),
+              child: const UserProfile(userName: 'My name'),
               ),
             ),
           ListTile(
