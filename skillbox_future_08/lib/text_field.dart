@@ -12,16 +12,48 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      onSubmitted: (value) {
-        onSubmitted(value);
-      },
-      decoration: const InputDecoration(
-        label: Text('Введите название файла'),
-        labelStyle: TextStyle(color: Colors.black54),
+    return Container(
+      alignment: Alignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 240,
+            height: 60,
+            child: TextField(
+              controller: controller,
+              // onSubmitted: (value) {
+              //   onSubmitted(value);
+              // },
+              decoration: const InputDecoration(
+                label: Text('Введите название файла'),
+                labelStyle: TextStyle(color: Colors.black54),
+              ),
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
+          Container(
+            width: 80,
+            height: 60,
+            decoration: const BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(10.0),
+                  bottomRight: Radius.circular(10.0)),
+            ),
+            child: TextButton(
+              child: const Text(
+                'Найти',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white),
+              ),
+              onPressed: () {onSubmitted(controller.text);},
+            ),
+          ),
+        ],
       ),
-      style: const TextStyle(fontSize: 18),
     );
   }
 }

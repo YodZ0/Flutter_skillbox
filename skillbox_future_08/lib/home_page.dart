@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:skillbox_future_08/build_future_text.dart';
 import 'text_field.dart';
-import 'fetch_file.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,21 +17,24 @@ class _HomaPageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: const Text('Future homework'), centerTitle: true),
+        appBar: AppBar(
+          title: const Text('Future homework'),
+          centerTitle: true,
+          backgroundColor: Colors.black87,
+        ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
           child: Column(
             children: [
               CustomTextField(
                 controller: textController,
-                onSubmitted:(fileToSearch) {
+                onSubmitted: (fileToSearch) {
                   setState(() {
                     file = fileToSearch;
                     textController.clear();
                   });
                 },
               ),
-              const SizedBox(height: 10),
               Text(
                 file,
                 style: const TextStyle(
@@ -40,35 +43,11 @@ class _HomaPageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 10),
-              _buildFutureText(file),
+              BuildFutureText(fileName: file),
             ],
           ),
         ),
       ),
     );
   }
-}
-
-Widget _buildFutureText(String fileName) {
-  return FutureBuilder(
-    future: fetchFileFromAssets('assets/$fileName'),
-    builder: (BuildContext context, AsyncSnapshot snapshot) {
-      switch (snapshot.connectionState) {
-        case ConnectionState.active:
-          return const Center(child: CircularProgressIndicator());
-        case ConnectionState.waiting:
-          return const Center(child: CircularProgressIndicator());
-        case ConnectionState.done:
-          return SingleChildScrollView(
-            child: Text(
-              snapshot.data,
-              textAlign: TextAlign.justify,
-              style: const TextStyle(fontSize: 18),
-            ),
-          );
-        default:
-          return const Center(child: CircularProgressIndicator());
-      }
-    },
-  );
 }
